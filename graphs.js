@@ -4,4 +4,5 @@ fetch('./prereqs.json').then(response => response.json())
     let G = new jsnx.DiGraph();
     G.addNodesFrom(Object.keys(data))
     console.log(Object.keys(data))
+    console.log('hello world?')
   });

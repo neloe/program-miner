@@ -9,5 +9,6 @@ fetch('./prereqs.json').then(response => response.json())
         for (pr in data[c])
           G.addEdge(pr, c)
     }
+    console.log(G.edges())
     document.getElementById('test').innerHTML='<p>'+G.edges()+'</p>'
   });

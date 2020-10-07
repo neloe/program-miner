@@ -1,14 +1,41 @@
-let G = new jsnx.DiGraph();
-fetch('./prereqs.json').then(response => response.json())
-  .then(data =>  {
+// for reference: https://bl.ocks.org/emeeks/8d75da95d1e78cd08899
+let data = new Object()
+chart = {
+  const svg = d3.select("#canvas");
 
-    G.addNodesFrom(Object.keys(data))
-    for (c in data)
+  svg.append("style").text(`
+
+.hover path {
+  stroke: #ccc;
+}
+
+.hover text {
+  fill: #ccc;
+}
+
+.hover g.primary text {
+  fill: black;
+  font-weight: bold;
+}
+
+.hover g.secondary text {
+  fill: #333;
+}
+
+.hover path.primary {
+  stroke: #333;
+  stroke-opacity: 1;
+}
+
+`);
+
+fetch('./prereqs.json').then(response => response.json())
+  .then(parsed =>  {
+    data.nodes = Object.keys(parsed)
+    data.links = new Array()
+    for (c in parsed)
     {
-      if (data[c].length > 0)
-        for (pr in data[c])
-          G.addEdge(pr, c)
+      for (pr in parsed[c])
+      data.links.push({source: parsed[c][pr], target: c})
     }
-    console.log(G.edges())
-    document.getElementById('test').innerHTML='<p>'+G.edges()+'</p>'
   });

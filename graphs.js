@@ -4,6 +4,9 @@ fetch('./prereqs.json').then(response => response.json())
   .then(data =>  {
 
     G.addNodesFrom(Object.keys(data))
-    console.log(Object.keys(data))
-    console.log('hello world?')
+    for (c in data)
+    {
+      for (pr in data[c])
+        G.addEdge(pr, c)
+    }
   });

@@ -1,9 +1,10 @@
-#canvas {
-  height: 100%;
-  width: 100%;
+body {
+  overflow: scroll;
 }
 
-svg {
-  height: 100%;
+svg
+{
+  height: 100em;
   width: 100%;
+  overflow-y: scroll;
 }

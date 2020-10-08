@@ -2,26 +2,24 @@
 fetch("csprereqs_arc.json").then(response => response.json())
 .then(data => {
 function _graph () {
-  const nodes = data.nodes.map(({id, group}) => ({
+  const nodes = data.nodes.map(({id, name, group}) => ({
     id,
+    name,
     sourceLinks: [],
     targetLinks: [],
     group
   }));
-  console.log(data.links)
-  console.log(nodes)
+  document.getElementById('canvas').style.height = (nodes.length-5) + 'em'
+
 
 
   const nodeById = new Map(nodes.map(d => [d.id, d]));
-  console.log(nodeById)
   const links = data.links.map(({source, target, value}) => ({
     source: nodeById.get(source),
     target: nodeById.get(target),
     value
   }));
-console.log(links)
   for (const link of links) {
-    console.log(link)
     const {source, target, value} = link;
     source.sourceLinks.push(link);
     target.targetLinks.push(link);
@@ -33,7 +31,7 @@ let graph = _graph()
 let height = 1104
 let step = 14
 let color = d3.scaleOrdinal(graph.nodes.map(d => d.group).sort(d3.ascending), d3.schemeCategory10)
-let margin = ({top: 20, right: 20, bottom: 20, left: 100})
+let margin = ({top: 20, right: 20, bottom: 20, left: 350})
 let y = d3.scalePoint(graph.nodes.map(d => d.id).sort(d3.ascending), [margin.top, height - margin.bottom])
 
 
@@ -79,7 +77,7 @@ function chart () {
           .attr("x", -6)
           .attr("dy", "0.35em")
           .attr("fill", d => d3.lab(color(d.group)).darker(2))
-          .text(d => d.id))
+          .text(d => d.name + '(' + d.id + ')'))
       .call(g => g.append("circle")
           .attr("r", 3)
           .attr("fill", d => color(d.group)));

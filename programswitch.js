@@ -1,5 +1,5 @@
 const year = '2020-2021'
-const programs = {'Computer Science': 'csprereqs_arc.json','Data Science and Informatics': 'dsiprereqs_arc.json'}
+const programs = {'Computer Science': 'csprereqs_arc.json','Data Science and Informatics': 'dsiprereqs_arc.json', 'Digital Media': 'dmprereqs_arc.json'}
 
 for (prog in programs)
 {

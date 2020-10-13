@@ -3,19 +3,23 @@ from os import path, mkdir
 from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
 
 year = '2020-2021'
-program = 'dsi'
+program = 'dm'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
 bscsfile = path.join(year, '{}reqs.json'.format(program))
 arcfile = path.join(year, '{}prereqs_arc.json'.format(program))
 
+CATPATH = 'Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44'
+
 urls = {
     'courses': '{}/{}/Undergraduate-Catalog/Courses/'.format(BASE_URL, year),
-    'cs': '{}/{}/Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44/Computer-Science-Comprehensive-Major-6669-hours-BSNo-Minor-Required'.format(
-        BASE_URL, year),
-    'dsi': '{}/{}/Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44/Data-Sciences-and-Informatics-Comprehensive-MajorComputer-Science-Emphasis-73-hours-BSNo-Minor-Required'.format(
-        BASE_URL, year)
+    'cs': '{}/{}/{}/Computer-Science-Comprehensive-Major-6669-hours-BSNo-Minor-Required'.format(
+        BASE_URL, year, CATPATH),
+    'dsi': '{}/{}/{}/Data-Sciences-and-Informatics-Comprehensive-MajorComputer-Science-Emphasis-73-hours-BSNo-Minor-Required'.format(
+        BASE_URL, year, CATPATH),
+    'dm': '{}/{}/{}/Digital-Media-Comprehensive-Major-66-hours-BSNo-Minor-Required'.format(
+        BASE_URL, year, CATPATH)
 }
 
 

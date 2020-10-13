@@ -1,9 +1,12 @@
 import json
 from os import path, mkdir
 from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
+from toposort import toposort
+from collections import defaultdict
 
 year = '2020-2021'
-program = 'cyber'
+programs = ['cs', 'dsi', 'dm', 'cyber']
+program = 'cs'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -77,14 +80,23 @@ reqset = set(reqlist)
 if '17230' in reqset:
     reqset.remove('17230')
 
-if not path.exists(arcfile):
-    nodes = [{'id': c, 'name': classinfo[c]['name'], 'group': int(c[2])} for c in cspres]
+interesting_courses = {c: prereqs[c] for c in reqset}
+graph = defaultdict(list)
+for c in interesting_courses:
+    for pr in interesting_courses[c]:
+        graph[pr].append(c)
+
+l = toposort(graph, interesting_courses.keys())
+
+# TODO: toposort to determine better ordering of classes?
+if path.exists(arcfile):
+    nodes = [{'id': c, 'name': classinfo[c]['name'], 'group': int(c[2])} for c in l]
     links = []
     for c in cspres:
         for pr in cspres[c]:
             if pr in reqset and pr[2] != '6':
                 links.append({'source': pr, 'target': c, 'value': 1})
-    with open(arcfile, 'w') as f:
-        json.dump({'nodes': nodes, 'links': links}, f)
+    #with open(arcfile, 'w') as f:
+    #    json.dump({'nodes': nodes, 'links': links}, f)
 
 #print(prereqs['44517'], '17230' in reqset)

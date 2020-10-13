@@ -1,16 +1,20 @@
 import json
 from os import path, mkdir
 from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
+
 year = '2020-2021'
+program = 'dsi'
 
 classfile = path.join(year, 'allclasses.json')
-bscsfile = path.join(year, 'bscsreqs.json')
 prereqsfile = path.join(year, 'allprereqs.json')
-arcfile = path.join(year, 'csprereqs_arc.json')
+bscsfile = path.join(year, '{}reqs.json'.format(program))
+arcfile = path.join(year, '{}prereqs_arc.json'.format(program))
 
 urls = {
     'courses': '{}/{}/Undergraduate-Catalog/Courses/'.format(BASE_URL, year),
-    'bscs': '{}/{}/Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44/Computer-Science-Comprehensive-Major-6669-hours-BSNo-Minor-Required'.format(
+    'cs': '{}/{}/Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44/Computer-Science-Comprehensive-Major-6669-hours-BSNo-Minor-Required'.format(
+        BASE_URL, year),
+    'dsi': '{}/{}/Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44/Data-Sciences-and-Informatics-Comprehensive-MajorComputer-Science-Emphasis-73-hours-BSNo-Minor-Required'.format(
         BASE_URL, year)
 }
 
@@ -38,7 +42,7 @@ else:
 reqlist = []
 if not path.exists(bscsfile):
     print('Updating BS in CS requirements for ' + year)
-    soup = makeSoup(urls['bscs'])
+    soup = makeSoup(urls[program])
     reqlist = [x.text.split()[1] for x in soup.findAll('a', {'class': 'sc-courselink'}) if len(x.text.split()) > 1]
     with open(bscsfile, 'w') as f:
         json.dump(reqlist, f)
@@ -51,9 +55,9 @@ prereqs = dict()
 if not path.exists(prereqsfile):
     print('Updating list of prereqs for ' + year)
     #oops
-    #prereqs = {key: getPrereqs(classinfo[key]['url']) for key in classinfo}
+    prereqs = {key: getPrereqs(classinfo[key]['url']) for key in classinfo}
     # this will only get the prereqs for the CS required classes... my bad
-    prereqs = {key: getPrereqs(classinfo[key]['url']) for key in reqlist}
+    #prereqs = {key: getPrereqs(classinfo[key]['url']) for key in reqlist}
     with open(prereqsfile, 'w') as f:
         json.dump(prereqs, f)
 else:
@@ -64,7 +68,8 @@ else:
 cspres = {k: prereqs[k] for k in reqlist if k in prereqs}
 
 reqset = set(reqlist)
-reqset.remove('17230')
+if '17230' in reqset:
+    reqset.remove('17230')
 
 if not path.exists(arcfile):
     nodes = [{'id': c, 'name': classinfo[c]['name'], 'group': int(c[2])} for c in cspres]

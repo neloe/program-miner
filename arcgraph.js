@@ -1,7 +1,9 @@
 // https://observablehq.com_/@d3/arc-diagram
 const yscale = 18
-fetch("2020-2021/csprereqs_arc.json").then(response => response.json())
+function _showdeps(fname) {
+fetch(fname).then(response => response.json())
 .then(data => {
+document.getElementById('canvas').innerHTML='';
 function _graph () {
   const nodes = data.nodes.map(({id, name, group}) => ({
     id,
@@ -152,3 +154,4 @@ function arc(d) {
 
 chart()
 })
+}

@@ -1,9 +1,10 @@
 // https://observablehq.com_/@d3/arc-diagram
 const yscale = 18
-function _showdeps(fname) {
+function _showdeps(fname, program) {
 fetch(fname).then(response => response.json())
 .then(data => {
 document.getElementById('canvas').innerHTML='';
+document.getElementById('currentprog').innerHTML=program
 function _graph () {
   const nodes = data.nodes.map(({id, name, group}) => ({
     id,

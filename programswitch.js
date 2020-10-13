@@ -1,0 +1,12 @@
+const year = '2020-2021'
+const programs = {'Computer Science': 'csprereqs_arc.json','Data Science and Informatics': 'dsiprereqs_arc.json'}
+
+for (prog in programs)
+{
+    let b = document.createElement('button')
+    b.classList.add('dropdown-item')
+    b.setAttribute('type', 'button')
+    b.setAttribute('onclick', '_showdeps("'+year + '/'+programs[prog]+'", "'+prog+'")')
+    b.innerHTML=prog
+    document.getElementById('program-menu').appendChild(b)
+}

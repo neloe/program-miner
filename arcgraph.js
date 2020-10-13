@@ -1,5 +1,6 @@
 // https://observablehq.com_/@d3/arc-diagram
-fetch("csprereqs_arc.json").then(response => response.json())
+const yscale = 18
+fetch("2020-2021/csprereqs_arc.json").then(response => response.json())
 .then(data => {
 function _graph () {
   const nodes = data.nodes.map(({id, name, group}) => ({
@@ -9,8 +10,8 @@ function _graph () {
     targetLinks: [],
     group
   }));
-  document.getElementById('canvas').style.height = (nodes.length-5) + 'em'
-
+  console.log(nodes.length)
+  document.getElementById('canvas').style.height = nodes.length * yscale
 
 
   const nodeById = new Map(nodes.map(d => [d.id, d]));
@@ -28,7 +29,7 @@ function _graph () {
   return {nodes, links};
 }
 let graph = _graph()
-let height = 1104
+let height = graph.nodes.length * yscale
 let step = 14
 let color = d3.scaleOrdinal(graph.nodes.map(d => d.group).sort(d3.ascending), d3.schemeCategory10)
 let margin = ({top: 20, right: 20, bottom: 20, left: 350})

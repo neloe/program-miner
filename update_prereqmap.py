@@ -3,7 +3,7 @@ from os import path, mkdir
 from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
 
 year = '2020-2021'
-program = 'dm'
+program = 'cyber'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -19,7 +19,9 @@ urls = {
     'dsi': '{}/{}/{}/Data-Sciences-and-Informatics-Comprehensive-MajorComputer-Science-Emphasis-73-hours-BSNo-Minor-Required'.format(
         BASE_URL, year, CATPATH),
     'dm': '{}/{}/{}/Digital-Media-Comprehensive-Major-66-hours-BSNo-Minor-Required'.format(
-        BASE_URL, year, CATPATH)
+        BASE_URL, year, CATPATH),
+    'cyber': '{}/{}/{}/Cybersecurity-Comprehensive-Major-60-62-hours-BS-No-Minor-Required'.format(
+        BASE_URL, year, CATPATH),
 }
 
 
@@ -45,7 +47,7 @@ else:
 ##### UPDATE OR READ YEAR CLASS LIST CACHE
 reqlist = []
 if not path.exists(bscsfile):
-    print('Updating BS in CS requirements for ' + year)
+    print('Updating '+program+' requirements for ' + year)
     soup = makeSoup(urls[program])
     reqlist = [x.text.split()[1] for x in soup.findAll('a', {'class': 'sc-courselink'}) if len(x.text.split()) > 1]
     with open(bscsfile, 'w') as f:

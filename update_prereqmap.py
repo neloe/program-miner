@@ -26,7 +26,9 @@ urls = {
     'cyber': '{}/{}/{}/Cybersecurity-Comprehensive-Major-60-62-hours-BS-No-Minor-Required'.format(
         BASE_URL, year, CATPATH),
     'bused': '{}/{}/{}/Business-Education-Major-42-hours-BSEd-Secondary-ProgramNo-Minor-Required-Certifies-Grades-912'.format(
-        BASE_URL, year, CATPATH)
+        BASE_URL, year, CATPATH),
+    'bused-second': '{}/{}/Undergraduate-Catalog/School-of-Education/Professional-Education-Unit/Education-Educational-Leadership-61/Education-BS-Secondary-Program-Certifies-Grades-912'.format(
+        BASE_URL, year)
 }
 
 
@@ -55,6 +57,9 @@ if not path.exists(bscsfile):
     print('Updating '+program+' requirements for ' + year)
     soup = makeSoup(urls[program])
     reqlist = [x.text.split()[1] for x in soup.findAll('a', {'class': 'sc-courselink'}) if len(x.text.split()) > 1]
+    if program+'-second' in urls:
+        soup = makeSoup(urls[program+'-second'])
+        reqlist.extend([x.text.split()[1] for x in soup.findAll('a', {'class': 'sc-courselink'}) if len(x.text.split()) > 1])
     with open(bscsfile, 'w') as f:
         json.dump(reqlist, f)
 else:

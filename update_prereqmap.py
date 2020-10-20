@@ -5,8 +5,8 @@ from toposort import toposort
 from collections import defaultdict
 
 year = '2020-2021'
-programs = ['cs', 'dsi', 'dm', 'cyber']
-program = 'cs'
+programs = ['cs', 'dsi', 'dm', 'cyber', 'bused']
+program = 'bused'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -25,6 +25,8 @@ urls = {
         BASE_URL, year, CATPATH),
     'cyber': '{}/{}/{}/Cybersecurity-Comprehensive-Major-60-62-hours-BS-No-Minor-Required'.format(
         BASE_URL, year, CATPATH),
+    'bused': '{}/{}/{}/Business-Education-Major-42-hours-BSEd-Secondary-ProgramNo-Minor-Required-Certifies-Grades-912'.format(
+        BASE_URL, year, CATPATH)
 }
 
 
@@ -89,14 +91,14 @@ for c in interesting_courses:
 l = toposort(graph, interesting_courses.keys())
 
 # TODO: toposort to determine better ordering of classes?
-if path.exists(arcfile):
+if not path.exists(arcfile):
     nodes = [{'id': c, 'name': classinfo[c]['name'], 'group': int(c[2])} for c in l]
     links = []
     for c in cspres:
         for pr in cspres[c]:
             if pr in reqset and pr[2] != '6':
                 links.append({'source': pr, 'target': c, 'value': 1})
-    #with open(arcfile, 'w') as f:
-    #    json.dump({'nodes': nodes, 'links': links}, f)
+    with open(arcfile, 'w') as f:
+        json.dump({'nodes': nodes, 'links': links}, f)
 
 #print(prereqs['44517'], '17230' in reqset)

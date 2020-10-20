@@ -5,8 +5,8 @@ from toposort import toposort
 from collections import defaultdict
 
 year = '2020-2021'
-programs = ['cs', 'dsi', 'dm', 'cyber', 'bused']
-program = 'bused'
+programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis']
+program = 'mis'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -28,7 +28,9 @@ urls = {
     'bused': '{}/{}/{}/Business-Education-Major-42-hours-BSEd-Secondary-ProgramNo-Minor-Required-Certifies-Grades-912'.format(
         BASE_URL, year, CATPATH),
     'bused-second': '{}/{}/Undergraduate-Catalog/School-of-Education/Professional-Education-Unit/Education-Educational-Leadership-61/Education-BS-Secondary-Program-Certifies-Grades-912'.format(
-        BASE_URL, year)
+        BASE_URL, year),
+    'mis': '{}/{}/{}/Management-Information-Systems-Comprehensive-Major-75-hours-BSNo-Minor-Required'.format(
+        BASE_URL, year, CATPATH),
 }
 
 

@@ -4,7 +4,8 @@ const programs = {'Computer Science': 'csprereqs_arc.json',
 'Digital Media': 'dmprereqs_arc.json',
 'Cybersecurity': 'cyberprereqs_arc.json',
 'Business Education': 'busedprereqs_arc.json',
-'Management Information Systems': 'misprereqs_arc.json'}
+'Management Information Systems': 'misprereqs_arc.json',
+'Business Technology': 'bustechprereqs_arc.json'}
 
 for (prog in programs)
 {

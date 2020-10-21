@@ -6,7 +6,7 @@ from collections import defaultdict
 
 year = '2020-2021'
 programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis', 'bustech']
-program = 'bustech'
+program = 'mis'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -31,6 +31,8 @@ urls = {
         BASE_URL, year),
     'mis': '{}/{}/{}/Management-Information-Systems-Comprehensive-Major-75-hours-BSNo-Minor-Required'.format(
         BASE_URL, year, CATPATH),
+    'mis-second': '{}/{}/Undergraduate-Catalog/Melvin-D-and-Valorie-G-Booth-School-of-Business/Common-Professional-Component-Requirements-for-Accredited-Business-Programs'.format(
+        BASE_URL, year),
     'bustech': '{}/{}/{}/Business-Technology-Comprehensive-Major-72-hours-BSNo-Minor-Required'.format(
         BASE_URL, year, CATPATH),
     'bustech-second': '{}/{}/Undergraduate-Catalog/Melvin-D-and-Valorie-G-Booth-School-of-Business/Common-Professional-Component-Requirements-for-Accredited-Business-Programs'.format(

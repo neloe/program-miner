@@ -4,9 +4,9 @@ from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
 from toposort import toposort
 from collections import defaultdict
 
-year = '2020-2021'
+year = '2021-2022'
 programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis', 'bustech']
-program = 'mis'
+program = 'bustech'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')

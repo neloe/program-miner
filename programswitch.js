@@ -1,4 +1,4 @@
-const year = '2020-2021'
+const year = '2021-2022'
 const programs = {'Computer Science': 'csprereqs_arc.json',
 'Data Science and Informatics': 'dsiprereqs_arc.json',
 'Digital Media': 'dmprereqs_arc.json',

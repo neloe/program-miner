@@ -6,7 +6,7 @@ from collections import defaultdict
 
 year = '2023-2024'
 programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis', 'bustech']
-program = 'bustech'
+program = 'mis'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')

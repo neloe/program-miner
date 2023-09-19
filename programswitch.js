@@ -31,18 +31,19 @@ for (y of years)
 document.getElementById("yearMenuButton").innerHTML=year
 document.getElementById("progMenuButton").innerHTML=program
 
-_showdeps(year + '/'+programs[prog]+'", "'+prog)
+_showdeps(year + '/'+programs[program], program)
 
 function change_year(y)
 {
     year = y
     document.getElementById("yearMenuButton").innerHTML=year
-    _showdeps(year + '/'+programs[prog]+'", "'+prog)
+    _showdeps(year + '/'+programs[program], program)
 }
 
 function change_program(p)
 {
-    program = prog
+    program = p
     document.getElementById("progMenuButton").innerHTML=program
-    _showdeps(year + '/'+programs[prog]+'", "'+prog)
+    console.log(prog + " " + programs[p])
+    _showdeps(year + '/'+programs[program], program)
 }

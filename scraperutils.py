@@ -1,18 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 
-BASE_URL = 'http://nwmissouri.smartcatalogiq.com'
+BASE_URL = 'https://nwmissouri.smartcatalogiq.com'
 
 
 def makeSoup(url):
-    page = requests.get(url)
+    page = requests.get(url.lower())
     return BeautifulSoup(page.text, 'html5lib')
 
 
 def getAllClasses(url):
     soup = makeSoup(url)
+
     classlist = soup.find('ul', {'class': 'sc-child-item-links'})
-    return {x.text.split()[1]: {'name': ' '.join(x.text.split()[2:]), 'url': BASE_URL + x['href']} for x in
+    return {x.text.split()[1][:5]: {'name': ' '.join(x.text.split()[2:]), 'url': BASE_URL + x['href']} for x in
             classlist.findAll('a')}
 
 

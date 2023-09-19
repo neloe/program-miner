@@ -4,9 +4,9 @@ from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
 from toposort import toposort
 from collections import defaultdict
 
-year = '2021-2022'
+year = '2022-2023'
 programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis', 'bustech']
-program = 'cyber'
+program = 'cs'
 
 classfile = path.join(year, 'allclasses.json')
 prereqsfile = path.join(year, 'allprereqs.json')
@@ -16,7 +16,7 @@ arcfile = path.join(year, '{}prereqs_arc.json'.format(program))
 CATPATH = 'Undergraduate-Catalog/School-of-Computer-Science-and-Information-Systems/Computer-Science-and-Information-Systems-44'
 
 urls = {
-    'courses': '{}/{}/Undergraduate-Catalog/Courses/'.format(BASE_URL, year),
+    'courses': '{}/en/{}/Undergraduate-Catalog/Courses/'.format(BASE_URL, year),
     'cs': '{}/{}/{}/Computer-Science-Comprehensive-Major-6669-hours-BSNo-Minor-Required'.format(
         BASE_URL, year, CATPATH),
     'dsi': '{}/{}/{}/Data-Sciences-and-Informatics-Comprehensive-MajorComputer-Science-Emphasis-73-hours-BSNo-Minor-Required'.format(
@@ -49,7 +49,7 @@ if not path.isdir(year):
 classinfo = dict()
 if not path.exists(classfile):
     print ('Updating class list for ' + year)
-    pagesoup = makeSoup(urls['courses'])
+    pagesoup = makeSoup(urls['courses'].lower())
     unitlist = pagesoup.find('ul', {'class': 'sc-child-item-links'})
     for u in unitlist.find_all('a'):
         classinfo.update(getAllClasses(BASE_URL+u['href']))

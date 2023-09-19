@@ -4,7 +4,7 @@ from scraperutils import BASE_URL, getAllClasses, makeSoup, getPrereqs
 from toposort import toposort
 from collections import defaultdict
 
-year = '2022-2023'
+year = '2023-2024'
 programs = ['cs', 'dsi', 'dm', 'cyber', 'bused', 'mis', 'bustech']
 program = 'bustech'
 

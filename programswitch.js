@@ -1,4 +1,4 @@
-let year = '2022-2023'
+let year = '2023-2024'
 let program = 'Computer Science'
 const programs = {'Computer Science': 'csprereqs_arc.json',
 'Data Science and Informatics': 'dsiprereqs_arc.json',
@@ -44,6 +44,6 @@ function change_program(p)
 {
     program = p
     document.getElementById("progMenuButton").innerHTML=program
-    console.log(prog + " " + programs[p])
+    console.log(program + " " + programs[p])
     _showdeps(year + '/'+programs[program], program)
 }
